@@ -1,0 +1,16 @@
+__pycache__/
+*.zip
+*.aux
+*.dvi
+*.log
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.out
+*.toc
+# Artifacts
+*.parquet
+data/*
+!data/demo_results/
+data/demo_results/*
+!data/demo_results/README.md

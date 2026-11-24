@@ -1,0 +1,35 @@
+{
+  "latex-workshop.latex.build.forceRecipeUsage": true,
+  "latex-workshop.latex.recipe.default": "first",
+  "latex-workshop.latex.autoClean.run": "never",
+  "latex-workshop.latex.autoBuild.run": "onFileChange",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "xelatex",
+      "tools": [
+        "xelatex"
+      ]
+    },
+    {
+      "name": "xelatex 2x (cross-ref)",
+      "tools": [
+        "xelatex",
+        "xelatex"
+      ]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ],
+      "env": {}
+    }
+  ]
+}

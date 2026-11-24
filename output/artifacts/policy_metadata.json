@@ -1,0 +1,18 @@
+{
+  "policy_type": "Discrete-CQL-EXPLICIT",
+  "reward_mode": "explicit",
+  "d_state": 32,
+  "actions": [
+    "lecture",
+    "quiz",
+    "groupwork",
+    "discussion",
+    "break"
+  ],
+  "cql_alpha": 1.0,
+  "final_loss": 6.965746879577637,
+  "action_entropy": 2.247,
+  "normalized_entropy": 0.968,
+  "mode_collapse": false,
+  "checkpoint_sha256": "2e7d2367742750e8f12ed4c934812ecb75bc3ecb66a7bf5861ff175e5e553900"
+}

@@ -1,0 +1,218 @@
+% !TEX program = xelatex
+% !TEX encoding = UTF-8 Unicode
+\documentclass[11pt,a4paper]{article}
+
+% --- CẤU HÌNH GÓI VÀ FONT ---
+\usepackage{fontspec}
+\setmainfont{Arial}[
+  BoldFont = {arialbd.ttf},
+  ItalicFont = {ariali.ttf},
+  BoldItalicFont = {arialbi.ttf}
+]
+\setmonofont{Consolas}[Scale=0.92]
+
+\usepackage[top=24mm, bottom=22mm, left=20mm, right=20mm, headheight=24pt]{geometry}
+\usepackage{amsmath, amssymb, amsfonts, bm, mathtools}
+\usepackage{booktabs, tabularx, multirow, array}
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{caption}
+
+% --- MÀU SẮC CHUẨN THIẾT KẾ ---
+\definecolor{NavyDark}{HTML}{0D233A}
+\definecolor{NavyBlue}{HTML}{1A365D}
+\definecolor{TealPrimary}{HTML}{007A87}
+\definecolor{TealLight}{HTML}{E6F4F6}
+\definecolor{TealBorder}{HTML}{99D5DC}
+\definecolor{SlateGray}{HTML}{4A5568}
+\definecolor{MutedGray}{HTML}{718096}
+\definecolor{LightBg}{HTML}{F8FAFC}
+\definecolor{AccentAmber}{HTML}{D97706}
+\definecolor{BorderGray}{HTML}{E2E8F0}
+\definecolor{SuccessGreen}{HTML}{0D9488}
+\definecolor{DarkRed}{HTML}{B91C1C}
+
+% --- CẤU HÌNH HYPERREF VÀ MỤC LỤC ---
+\usepackage[
+  colorlinks=true,
+  linkcolor=NavyBlue,
+  citecolor=TealPrimary,
+  urlcolor=TealPrimary,
+  bookmarks=true,
+  bookmarksnumbered=true,
+  pdfpagemode=UseOutlines,
+  pdfstartview=FitH,
+  pdftitle={ClassTwin - Đề án Bản sao số Lớp học \& Tối ưu hóa Chính sách Giảng dạy bằng Offline RL},
+  pdfauthor={SCIC 2026 Team},
+  pdfsubject={SCIC 2026 Proposal: Classroom Digital Twin, Deep RL, Pedagogical Decision Support, EdTech Business Strategy}
+]{hyperref}
+
+% --- ĐỊNH DẠNG HEADER / FOOTER ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{MutedGray}{\footnotesize \textbf{SCIC 2026} • Đề án Nghiên cứu \& Thương mại hóa ClassTwin}}
+\fancyhead[R]{\textcolor{MutedGray}{\footnotesize \hyperlink{toc}{Về Mục lục $\uparrow$}}}
+\fancyfoot[L]{\textcolor{MutedGray}{\footnotesize \textbf{Bản quyền đề án} © 2026 ClassTwin Team. Giữ toàn quyền.}}
+\fancyfoot[R]{\textcolor{NavyDark}{\footnotesize \textbf{Trang \thepage}}}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{TealBorder}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{BorderGray}\leaders\hrule height \footrulewidth\hfill}}
+
+% --- ĐỊNH DẠNG TIÊU ĐỀ ---
+\titleformat{\section}
+  {\color{NavyDark}\Large\bfseries}
+  {\thesection.}{0.8em}{}
+  [\color{TealPrimary}\titlerule]
+
+\titleformat{\subsection}
+  {\color{TealPrimary}\large\bfseries}
+  {\thesubsection}{0.6em}{}
+
+\titleformat{\subsubsection}
+  {\color{NavyBlue}\normalsize\bfseries}
+  {\thesubsubsection}{0.5em}{}
+
+% --- HỘP THÔNG TIN TCOLORBOX ---
+\newtcolorbox{highlightbox}[1][]{
+  colback=TealLight,
+  colframe=TealPrimary,
+  fonttitle=\bfseries\color{white},
+  coltitle=white,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title=#1,
+  breakable
+}
+
+\newtcolorbox{businessbox}[1][]{
+  colback=LightBg,
+  colframe=NavyBlue,
+  fonttitle=\bfseries\color{white},
+  coltitle=white,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title=#1,
+  breakable
+}
+
+\newtcolorbox{alertbox}[1][]{
+  colback=LightBg,
+  colframe=AccentAmber,
+  fonttitle=\bfseries\color{white},
+  coltitle=white,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title=#1,
+  breakable
+}
+
+% --- CẤU HÌNH BẢNG BIỂU VÀ DANH SÁCH ---
+\setlist[itemize]{leftmargin=1.4em, itemsep=2pt, topsep=3pt}
+\setlist[enumerate]{leftmargin=1.4em, itemsep=2pt, topsep=3pt}
+\renewcommand{\arraystretch}{1.2}
+
+% --- CẤU HÌNH ALGORITHM ---
+\renewcommand{\algorithmicrequire}{\textbf{Đầu vào:}}
+\renewcommand{\algorithmicensure}{\textbf{Đầu ra:}}
+\floatname{algorithm}{Thuật toán}
+
+\begin{document}
+
+% =========================================================================
+% TRANG BÌA (COVER PAGE)
+% =========================================================================
+\begin{titlepage}
+  \centering
+  \vspace*{8mm}
+  {\scshape\Large CUỘC THI SINH VIÊN NGHIÊN CỨU KHOA HỌC -- SCIC 2026\par}
+  \vspace{3mm}
+  {\color{TealPrimary}\rule{\textwidth}{1.5pt}\par}
+  \vspace{15mm}
+
+  {\Huge\bfseries\color{NavyDark} CLASSROOM DIGITAL TWIN\par}
+  \vspace{3mm}
+  {\LARGE\bfseries\color{TealPrimary} (ClassTwin)\par}
+  \vspace{8mm}
+  
+  {\Large\itshape Hệ thống Bản sao số Lớp học Tối ưu hóa Chiến sách Giảng dạy\\bằng Offline Reinforcement Learning và Hỗ trợ Ra Quyết định Sư phạm\par}
+  \vspace{10mm}
+
+  \begin{tcolorbox}[colback=LightBg, colframe=NavyBlue, boxrule=1pt, arc=4pt, width=0.92\textwidth]
+    \centering\small
+    \textbf{ĐẶC TẢ ĐỀ ÁN NGHIÊN CỨU \& KẾ HOẠCH THƯƠNG MẠI HÓA TOÀN DIỆN}\\
+    \vspace{2mm}
+    \textit{Tích hợp: Mô hình hóa Toán học • Deep Knowledge Tracing • POMDP Bán Markov •\\
+    Offline Constrained RL (CQL) • Kiến trúc Edge-to-Cloud Privacy-First •\\
+    Chiến lược Kinh doanh B2B SaaS • Phân khúc Khách hàng • Mô hình Định giá \& Dự phóng Tài chính}
+  \end{tcolorbox}
+
+  \vfill
+
+  \begin{minipage}{0.48\textwidth}
+    \textbf{Nhóm Tác giả / Đơn vị thực hiện:}\\
+    Nhóm Nghiên cứu ClassTwin\\
+    SCIC 2026 -- Lĩnh vực Trí tuệ Nhân tạo trong Giáo dục (AIED)
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+    \raggedleft
+    \textbf{Phiên bản tài liệu:} v2.0 (Toán học, Mã giả \& Kinh doanh)\\
+    \textbf{Ngày hoàn thiện:} 17 Tháng 10, 2026\\
+    \textbf{Mã lưu trữ:} \texttt{SCIC2026-CLASSTWIN-DOCS}
+  \end{minipage}
+
+  \vspace{8mm}
+  {\color{TealPrimary}\rule{\textwidth}{1pt}\par}
+\end{titlepage}
+
+% =========================================================================
+% MỤC LỤC TƯƠNG TÁC (HYPERREF TABLE OF CONTENTS)
+% =========================================================================
+\newpage
+\phantomsection
+\hypertarget{toc}{}
+\tableofcontents
+\vspace{8mm}
+\noindent\textcolor{TealPrimary}{\rule{\textwidth}{0.8pt}}
+\vspace{4mm}
+
+\noindent\textbf{Hướng dẫn tra cứu nhanh:} Toàn bộ các tiêu đề, công thức, thuật toán và bảng biểu trong tài liệu đều được gắn liên kết định danh. Quý độc giả và thành viên hội đồng có thể bấm trực tiếp vào các mục lục trên hoặc các thẻ tham chiếu \texttt{\textbackslash ref\{\}} trong văn bản để chuyển nhanh đến nội dung tương ứng.
+
+\newpage
+% =========================================================================
+% CÁC PHÂN HỆ NỘI DUNG ĐƯỢC MÔ-ĐUN HÓA (MODULAR SECTIONS)
+% =========================================================================
+\input{sections/01_introduction.tex}
+\newpage
+
+\input{sections/02_theoretical_framework.tex}
+\newpage
+
+\input{sections/03_algorithms.tex}
+\newpage
+
+\input{sections/04_system_architecture.tex}
+\newpage
+
+\input{sections/05_data_and_experiments.tex}
+\newpage
+
+\input{sections/06_business_and_market.tex}
+\newpage
+
+\input{sections/07_implementation_and_risks.tex}
+\newpage
+
+\input{sections/08_references.tex}
+
+\end{document}
